@@ -16,7 +16,6 @@ from flask import Flask, make_response, request
 import yaml
 
 app = Flask(__name__)
-
 data = yaml.safe_load(open('../data/data.yml', 'r'))
 users = {}
 

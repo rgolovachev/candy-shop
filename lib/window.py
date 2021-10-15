@@ -45,7 +45,7 @@ class ShopWindow(QMainWindow):
              self.sender().setEnabled(False)
         self.label_update()
 
-    def label_update(self, first_time = False):
+    def label_update(self, first_time=False):
         label_text = "В магазине осталось:\n"
         for key, value in self.counter.items():
             label_text += "{} : {} штук\n".format(self.buttons[key], value)
