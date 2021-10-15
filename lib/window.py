@@ -33,10 +33,8 @@ class ShopWindow(QMainWindow):
 
         self.label_update(True)
 
-        # # это константа
         self.label.setGeometry(*self.data_geometry[0])
 
-        # это тоже константа
         self.resize(*self.data_geometry[1])
 
     def on_click(self):
