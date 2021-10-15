@@ -15,7 +15,7 @@ class ShopWindow(QMainWindow):
         with open(os.path.join(data_path, 'data/data_name.yml'), 'r') as file:
             self.setWindowTitle(yaml.safe_load(file))
 
-        with open(os.path.join('..', 'data/data_geometry.yml'), 'r') as file:
+        with open(os.path.join(data_path, 'data/data_geometry.yml'), 'r') as file:
             self.data_geometry = yaml.safe_load(file)
 
         if buttons_data is not None:
@@ -30,7 +30,6 @@ class ShopWindow(QMainWindow):
             cur_btn.setGeometry(*self.buttons_data[key][0])
             cur_btn.clicked.connect(self.on_click)
             self.counter[cur_btn] = self.buttons_data[key][1]
-            print(cur_btn.geometry())
 
         self.label_update(True)
 
