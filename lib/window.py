@@ -1,25 +1,28 @@
 import yaml
 from PyQt5.QtWidgets import QLabel,  QMainWindow, QPushButton
+import os
 
 
 class ShopWindow(QMainWindow):
 
-    def __init__(self):
+    def __init__(self, data_path='', buttons_data=None):
         super().__init__()
 
-        self.buttons_data = dict()
         self.buttons = dict()
         self.counter = dict()
         self.data_geometry = list()
 
-        with open('data/data_name.yml', 'r') as file:
+        with open(os.path.join(data_path, 'data/data_name.yml'), 'r') as file:
             self.setWindowTitle(yaml.safe_load(file))
 
-        with open('data/data_geometry.yml', 'r') as file:
+        with open(os.path.join('..', 'data/data_geometry.yml'), 'r') as file:
             self.data_geometry = yaml.safe_load(file)
 
-        with open('data/data.yml', 'r') as file:
-            self.buttons_data = yaml.safe_load(file)
+        if buttons_data is not None:
+            self.buttons_data = buttons_data
+        else:
+            with open('data/data.yml', 'r') as file:
+                self.buttons_data = yaml.safe_load(file)
 
         for key in self.buttons_data.keys():
             cur_btn = QPushButton(key, self)
@@ -27,6 +30,7 @@ class ShopWindow(QMainWindow):
             cur_btn.setGeometry(*self.buttons_data[key][0])
             cur_btn.clicked.connect(self.on_click)
             self.counter[cur_btn] = self.buttons_data[key][1]
+            print(cur_btn.geometry())
 
         self.label_update(True)
 
